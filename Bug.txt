@@ -1,0 +1,27 @@
+Max cartQty set to 10 and to display a message if exceeded.
+Clicking +3 till it reachs full capacity will go beyond cart max.
+Clicking +3 reaches a halt at 12 before declaring max capacity reached.
+
+Happens when +3 is clicked after either +2, +3, or +5 are clicked, i.e will not work if you start by pushing
+another button say +4.
+This only happens when clicked in a certain order
+
++3,  +3, +3, +5 = 14
++3, +3, +3, +3 = 12
++5 ,+3, +3 = 11
++2 ,+3, +3 = 11
+
+I suspect this happens only because the bug is caught mid through calculation.
+
+Bug Fix:
+
+Rewriting the code as such will fix the issue
+
+for (cartQty >= 10){
+
+	console.log('Cart Full');
+	cartQty = 10;
+
+} else {
+	cartQty += 3
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/jpg" href="\Favicons\kicks6.jpg">
+
+    <title>Cart Qty Copy</title>
+
+
+</head>
+<body>
+    
+    <button 
+    onclick="
+    
+    console.log(`Cart Quantity: ${cartQty}`);
+    
+    "
+    >
+        Show Qty
+    </button>
+
+    <button
+    
+    onclick="
+    
+    if(cartQty >= 10){
+        console.log('Cart Full')
+    } else {
+        cartQty += 1
+    }
+    
+    "
+
+    >
+        Add To Cart
+    </button>
+
+    <button
+    
+    onclick="
+    
+    if(cartQty >= 10){
+        console.log('Cart Full')
+    } else {
+        cartQty += 2
+    }
+    
+    "
+    
+    >
+        +2
+    </button>
+
+    <button 
+    
+    onclick="
+    
+    if(cartQty >= 10){
+        console.log('Cart Full')
+    } else {
+        cartQty += 3
+    }
+    
+    "
+    
+    >
+        +3
+    </button>
+
+    <button onclick="
+    
+    if(cartQty >= 10){
+        console.log('Cart Full')
+    } else {
+        cartQty += 4
+    }
+    
+    ">
+        +4
+    </button>
+
+    <button onclick="
+
+    if(cartQty >= 10){
+        console.log('Cart Full')
+    } else {
+        cartQty += 5
+    }
+    
+    ">
+        +5
+    </button>
+
+    <button onclick="
+    cartQty -= 1;
+    ">
+        Remove from cart
+    </button>
+
+    <button
+    
+    onclick="
+    
+    cartQty *= 0;
+    console.log('Cart has been reset.');
+    
+    "
+    >
+        Reset Cart
+    </button>
+
+
+    <script>
+
+        let cartQty = 0;
+
+    </script>
+
+</body>
+</html>
