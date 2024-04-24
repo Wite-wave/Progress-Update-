@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPS test</title>
+</head>
+<body>
+    
+    <button onclick="
+    
+    randInt = Math.random();
+    playGame('rock');
+
+    ">
+        Rock
+    </button>
+    
+    <button Onclick="
+    
+    randInt = Math.random()
+    playGame('paper');
+
+    ">
+        Paper
+    </button>
+    
+    <button Onclick="
+    
+    randInt = Math.random();
+    playGame('scissors');
+
+
+    ">
+        Scissors
+    </button>
+
+    <p class="js-result">
+
+    </p>
+
+    <p class="js-moves">
+
+    </p>
+
+    <p class="js-scoreBoard">
+
+    </p>
+
+    <p>
+        <button onclick="
+        
+        console.log(localStorage.getItem('scoreHistory'));
+        
+        ">
+            Log Score
+        </button>
+
+        <button onclick="
+        
+        scoreHistory = scoreCount = {
+            wins: 0,
+            loses: 0,
+            ties: 0
+        };
+
+        localStorage.setItem('scoreHistory', JSON.stringify(scoreHistory));
+        console.log(localStorage.getItem('scoreHistory'))
+        
+        ">
+            Reset Score
+        </button>
+    </p>
+
+
+
+    <script>
+
+        let randInt = Math.random;
+        let playerMove;
+        let aiMove;
+        let result;
+        let scoreCount = {
+            wins: 0,
+            loses: 0,
+            ties: 0
+        } || scoreHistory;
+        let scoreHistory = JSON.parse(localStorage.getItem('scoreHistory'));
+
+        scoreBoard();
+
+    /*
+        function updateScore(){
+            if(result === 'win'){
+                scoreCount.wins++
+            } else if(result === 'lose'){
+                scoreCount.loses++
+            } else if(result === 'tie'){
+                scoreCount.ties++
+            }
+        }
+    */
+
+        function pickCompMove(){
+
+            if( randInt < 0.3){
+                aiMove = 'scissors';
+            } else if(randInt >= 0.3 && randInt < 0.6){
+                aiMove = 'rock';
+            } else if(randInt >= 0.6){
+                aiMove = 'paper';
+            }
+
+        }
+
+        function playGame(move){
+            
+            playerMove = move;
+
+            pickCompMove();
+
+            /*
+            placing any code here causes the first game to come out undefined. Of course this is rectified after the first round but it's that this happens in the first place. It also happen if you place randInt = Math.random in the onclick event listener.
+            Placing the 3 functions at the bottom will make the code to give a first result if undefined. So, how do you fix this ? simple you put anything there. I figures it's a js thing I will understand later when I start going in depth of how JS works.
+            */
+
+            /* Aparently the first result isn't recorded into scoreCount. Fixed by updating scoreCount inside of the playGaame function */
+
+            if(aiMove === playerMove){
+
+                result = 'tie';
+                //scoreCount.ties += 1;
+
+            } else if(aiMove === 'rock' && playerMove === 'paper'){
+                result = 'win';
+                //scoreCount.win += 1;
+            } else if(aiMove === 'rock' && playerMove === 'scissors'){
+                result = 'lose';
+                //scoreCount.loses += 1;
+            } else if(aiMove === 'paper' && playerMove === 'rock'){
+                result = 'lose';
+                //scoreCount.loses += 1;
+            } else if(aiMove === 'paper' && playerMove === 'scissors'){
+                result = 'win';
+                //scoreCount.wins += 1;
+            } else if(aiMove === 'scissors' && playerMove === 'paper'){
+                result = 'lose';
+                //scoreCount.loses += 1;
+            } else if(aiMove === 'scissors' && playerMove === 'rock'){
+                result = 'win';
+                //scoreCount.wins += 1;
+            }
+
+            if(result === 'win'){
+                scoreCount.win += 1;
+            } else if(result === 'lose'){
+                scoreCount.loses += 1;
+            } else if(result === 'tie'){
+                scoreCount.ties+= 1;
+            }
+
+            console.log(result);
+
+            localStorage.setItem('scoreHistory', JSON.stringify(scoreCount));
+
+            displayResult();
+            scoreBoard();
+            //updateScore();
+            showMoves();
+
+
+        }
+
+        function displayResult(){
+            document.querySelector('.js-result').innerHTML = `You ${result}.`;
+        }
+
+        function scoreBoard(){
+            document.querySelector('.js-scoreBoard').innerHTML = `Wins: ${scoreCount.wins}, loses: ${scoreCount.loses}, Ties: ${scoreCount.ties}`;
+
+        }
+
+        function showMoves(){
+
+            document.querySelector('.js-moves').innerHTML = `You chose ${playerMove} , the computer chose ${aiMove}`
+
+        }
+
+        /*
+        Now we have another bug that gives a double value if sometimes when you play the game
+        */
+
+    </script>
+
+</body>
+</html>
